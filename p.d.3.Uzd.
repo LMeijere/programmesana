@@ -1,0 +1,18 @@
+import requests
+from bs4 import BeautifulSoup
+
+url = "http://r64vsk.lv/"
+
+response = requests.get(url)
+print(response)
+
+soup = BeautifulSoup(response.content, 'html.parser')
+
+events_text = soup.find("div", class_="r64-events").get_text(separator="\n")
+
+class_name = input("Enter the class (e.g. 9.a): ")
+
+events = events_text.split('\n')
+for event in events:
+    if class_name.lower() in event.lower():
+        print(event)
