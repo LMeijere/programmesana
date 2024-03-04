@@ -1,0 +1,14 @@
+import requests
+from bs4 import BeautifulSoup
+
+url = "http://r64vsk.lv/"
+
+response = requests.get(url)
+print(response)
+
+soup = BeautifulSoup(response.content, 'html.parser')
+
+tags = soup.find_all("h1")
+print("Number of h1 tags:", len(tags))
+for tag in tags:
+    print(tag.text)
